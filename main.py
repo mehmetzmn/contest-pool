@@ -58,29 +58,32 @@ def get_trackbar(frame, window_name='frame'):
 
 # NOTE: lowV: 44, highH: 69, lowS: 0, highS: 158, lowV: 133, highV: 255 --> white ball
 
-lower_range = (40, 0, 130) # from (44, 0, 133)
-upper_range = (67, 155, 255) # from (69, 158, 255)
+white_ball_lower_range = (40, 0, 98)
+white_ball_upper_range = (79, 87, 255)
 
-frame_count = 0
-frames_list = np.zeros((480, 640, 3))
+stick_lower_range = (21, 3, 154)
+stick_upper_range = (89, 48, 195)
 
 while True:
     success, frame = capture.read()
-    
+    # frame = cv2.imread("normal.png")
+    # frame = cv2.imread('new_image.png')
+    # frame = frame[10: 400, 51:588] # for image
     if frame is None: break
 
-    width = 640
-    height = 480
+    width = 1280
+    height = 720
     dim = (width, height)
 
     frame = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
+    # frame = frame[10: 400, 51:588] # for video
 
     # NOTE: not calling not existing trackbar    
     hsv_trackbar, hsv_values = get_trackbar(frame, window_name='hsv_trackbar')
     print(hsv_values)
 
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    mask = cv2.inRange(hsv, lower_range, upper_range)
+    mask = cv2.inRange(hsv, white_ball_lower_range, white_ball_upper_range)
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (15, 15))
     mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
     mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
@@ -103,3 +106,6 @@ while True:
     if keyboard == 27 or keyboard == ord('q'):
         break
 
+# {'ilowH': 21, 'ihighH': 89, 'ilowS': 3, 'ihighS': 48, 'ilowV': 154, 'ihighV': 195
+# {'ilowH': 64, 'ihighH': 99, 'ilowS': 20, 'ihighS': 102, 'ilowV': 145, 'ihighV': 212}
+# {'ilowH': 41, 'ihighH': 76, 'ilowS': 0, 'ihighS': 111, 'ilowV': 109, 'ihighV': 255}
