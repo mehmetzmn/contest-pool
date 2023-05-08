@@ -1,0 +1,13 @@
+.DS_Store
+.venv
+.vscode
+__pycache__
+Billiard objects detection.v3i.yolov8
+tfod/detected_images
+detected_frames
+frames.zip
+frames
+runs
+segmented_frames
+path.txt
+yolov8x-seg.pt
