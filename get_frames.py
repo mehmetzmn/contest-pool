@@ -9,8 +9,10 @@ import skvideo.io
 print("current directory is : " + os.getcwd())
 
 
-path = 'Shot-Predictor-Video.mp4'
-path = '/Users/archosan/Desktop/Python projects/contest/contest-pool/tfod/video.mp4'
+ROOT = os.getcwd()
+
+MAIN_VIDEO = 'Shot-Predictor-Video.mp4'
+OUTPUT = f'{ROOT}/tfod/video.mp4'
 pathOut = 'frames'
 path_yolo = "video-yolo.mp4"
 
@@ -72,9 +74,9 @@ def frame_to_vid(num_frames, width, height, ch, image_dir, video_name):
 
 
 frame_to_vid(1222, 1280, 720, 3,
-             '/Users/archosan/Desktop/Python projects/contest/contest-pool/detected_frames', 'video-yolo.mp4')
+             f'{ROOT}/detected_frames', 'video-yolo.mp4')
 
 # read_video(path_yolo)
 
 frame_to_vid(1222, 1280, 720, 3,
-             "/Users/archosan/Desktop/Python projects/contest/contest-pool/segmented_frames", "video-yolo-segmented.mp4")
+             f"{ROOT}/segmented_frames", "video-yolo-segmented.mp4")
